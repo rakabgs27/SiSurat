@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriSuratController;
+use App\Http\Controllers\SuratController;
 use App\Models\KategoriSurat;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,4 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::resource('kategori-surat', KategoriSuratController::class);
+Route::resource('surat', SuratController::class);

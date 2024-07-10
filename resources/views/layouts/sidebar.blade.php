@@ -13,7 +13,7 @@
                     <label>Menu</label>
                 </li>
                 <li class="nxl-item">
-                    <a href="{{ url('arsip') }}" class="nxl-link">
+                    <a href="{{route('surat.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="fas fa-star"></i></span>
                         <span class="nxl-mtext">Arsip</span>
                     </a>

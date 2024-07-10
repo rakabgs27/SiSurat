@@ -8,12 +8,12 @@
                 <div class="card stretch stretch-full">
                     <div class="card-body">
                         <!-- Header and Search Form Start -->
-                        <h2>Kategori Surat</h2>
-                        <p>Berikut ini adalah kategori yang bisa digunakan untuk melabeli surat. </p>
-                        <p> Klik "Tambah" pada kolom aksi untuk menambahkan kategori baru.</p>
-                        <form action="{{ route('kategori-surat.index') }}" method="GET" class="mb-4">
+                        <h2>Arsip Surat</h2>
+                        <p>Berikut ini adalah surat-surat yang telah terbit dan diarsipkan.</p>
+                        <p>Klik "Lihat" pada kolom aksi untuk menampilkan surat.</p>
+                        <form action="{{ route('surat.index') }}" method="GET" class="mb-4">
                             <div class="search-container">
-                                <p>Cari kategori :</p>
+                                <p>Cari surat :</p>
                                 <div class="input-group">
                                     <input type="text" name="search" id="search" class="form-control"
                                         placeholder="search" value="{{ request()->query('search') }}">
@@ -21,45 +21,46 @@
                                 <button type="submit" class="btn btn-search">Cari</button>
                             </div>
                         </form>
-
                         <!-- Header and Search Form End -->
                         <div class="table-responsive">
                             <table class="table table-bordered" id="proposalList">
                                 <thead>
                                     <tr>
-                                        <th>ID Kategori</th>
-                                        <th>Nama Kategori</th>
-                                        <th>Keterangan</th>
-                                        <th class="text-end">Aksi</th>
+                                        <th>Nomor Surat</th>
+                                        <th>Kategori</th>
+                                        <th>Judul</th>
+                                        <th>Waktu Pengarsipan</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($kategoriSurats as $kategoriSurat)
+                                    @foreach ($Arsips as $arsipItem)
                                         <tr>
-                                            <td>{{ ($kategoriSurats->currentPage() - 1) * $kategoriSurats->perPage() + $loop->index + 1 }}
-                                            </td>
-                                            <td>{{ $kategoriSurat->nama_kategori }}</td>
-                                            <td>{{ $kategoriSurat->keterangan }}</td>
-                                            <td class="text-end">
+                                            <td>{{ $arsipItem->nomor_surat }}</td>
+                                            <td>{{ $arsipItem->kategori->nama_kategori }}</td>
+                                            <td>{{ $arsipItem->judul_surat }}</td>
+                                            <td>{{ $arsipItem->created_at }}</td>
+                                            <td>
                                                 <button type="button" class="btn btn-danger"
-                                                    onclick="confirmDelete({{ $kategoriSurat->id }})">Hapus</button>
-                                                <form id="delete-form-{{ $kategoriSurat->id }}"
-                                                    action="{{ route('kategori-surat.destroy', $kategoriSurat->id) }}"
-                                                    method="POST" style="display: none;">
+                                                    onclick="confirmDelete({{ $arsipItem->id }})">Hapus</button>
+                                                <form id="delete-form-{{ $arsipItem->id }}"
+                                                    action="{{ route('surat.destroy', $arsipItem->id) }}" method="POST"
+                                                    style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                                <a href="{{ route('kategori-surat.edit', $kategoriSurat->id) }}"
-                                                    class="btn btn-primary">Edit</a>
+                                                <a href="{{ Storage::url($arsipItem->file_surat) }}" class="btn btn-warning"
+                                                    download="{{ $arsipItem->file_name }}">Unduh</a>
+                                                <a href="{{ route('surat.show', $arsipItem->id) }}"
+                                                    class="btn btn-primary">Lihat >></a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        {{ $kategoriSurats->links() }}
-                        <a href="{{ route('kategori-surat.create') }}" class="btn btn-success mt-3">[ + ] Tambah Kategori
-                            Baru...</a>
+                        {{ $Arsips->links() }}
+                        <a href="{{ route('surat.create') }}" class="btn btn-success mt-3">Arsipkan Surat</a>
                     </div>
                 </div>
             </div>

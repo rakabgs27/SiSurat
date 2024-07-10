@@ -56,7 +56,7 @@ class KategoriSuratController extends Controller
             $kategoriSurat->keterangan = $request->keterangan;
             $kategoriSurat->save();
 
-            return redirect()->route('kategori-surat.index')->with('success', 'Kategori surat berhasil ditambahkan');
+            return redirect()->route('kategori-surat.index')->with('success', 'Data berhasil disimpan!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menambahkan kategori surat: ' . $e->getMessage());
         }
@@ -100,7 +100,7 @@ class KategoriSuratController extends Controller
             $kategoriSurat->keterangan = $request->keterangan;
             $kategoriSurat->save();
 
-            return redirect()->route('kategori-surat.index')->with('success', 'Kategori surat berhasil diperbarui');
+            return redirect()->route('kategori-surat.index')->with('success', 'Data berhasil diperbarui!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui kategori surat: ' . $e->getMessage());
         }
@@ -113,7 +113,7 @@ class KategoriSuratController extends Controller
 
             $kategoriSurat->delete();
 
-            return redirect()->route('kategori-surat.index')->with('success', 'Kategori surat berhasil dihapus');
+            return redirect()->route('kategori-surat.index');
         } catch (Exception $e) {
             return redirect()->route('kategori-surat.index')->with('error', 'Terjadi kesalahan saat menghapus kategori surat: ' . $e->getMessage());
         }
