@@ -19,13 +19,13 @@
                     </a>
                 </li>
                 <li class="nxl-item">
-                    <a href="{{ url('kategori-surat') }}" class="nxl-link">
+                    <a href="{{route('kategori-surat.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="fas fa-cogs"></i></span>
                         <span class="nxl-mtext">Kategori Surat</span>
                     </a>
                 </li>
                 <li class="nxl-item">
-                    <a href="{{ url('about') }}" class="nxl-link">
+                    <a href="{{ route('about') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="fas fa-info-circle"></i></span>
                         <span class="nxl-mtext">About</span>
                     </a>
